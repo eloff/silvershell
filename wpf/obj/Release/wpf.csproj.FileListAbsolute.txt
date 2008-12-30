@@ -1,0 +1,13 @@
+C:\Projects\wpf\bin\Release\_wpf.dll
+C:\Projects\wpf\bin\Release\_wpf.pdb
+C:\Projects\wpf\bin\Release\IronPython.dll
+C:\Projects\wpf\bin\Release\Microsoft.Scripting.dll
+C:\Projects\wpf\bin\Release\Microsoft.Scripting.Core.dll
+C:\Projects\wpf\bin\Release\Microsoft.Scripting.ExtensionAttribute.dll
+C:\Projects\wpf\obj\Release\ResolveAssemblyReference.cache
+C:\Projects\wpf\obj\Release\_wpf.dll
+C:\Projects\wpf\obj\Release\_wpf.pdb
+C:\Projects\wpf\bin\Release\Microsoft.Dynamic.dll
+C:\Projects\wpf\bin\Release\Microsoft.Scripting.Core.xml
+C:\Projects\wpf\bin\Release\Microsoft.Dynamic.xml
+C:\Projects\wpf\bin\Release\Microsoft.Scripting.xml

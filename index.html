@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+
+<head>
+  <title>SilverShell</title>
+
+  <style type="text/css">
+    html, body 
+    {
+    	margin: 0;
+    	padding: 0;
+    	overflow: hidden;    	
+    }
+  </style>
+
+  <!-- Formatting for DLR error handling -->
+  <style type="text/css">
+    div.silverlightDlrErrorReport {
+      font-size: 12px;
+      font-weight: normal;
+      font-family: Consolas, "Courier New", serif;
+      color: black;
+      background-color: white;
+      text-align: left;
+    }
+
+    div.silverlightDlrErrorReport a,
+    div.silverlightDlrErrorReport a:link,
+    div.silverlightDlrErrorReport a:visited {
+      padding: 2px;
+      background-color: none;
+      color: black;
+    }
+    div.silverlightDlrErrorReport a:hover {
+      background-color: black;
+      color: white;
+    }
+
+    div.silverlightDlrErrorWrapper {
+      overflow: auto;
+      background-color: white;
+
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+
+      border-top: 2px solid black;
+      border-right: 2px solid black;
+      border-left: 2px solid black;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+    }
+
+    h2.silverlightDlrErrorMessage {
+      margin: 0px;
+      background-color: black;
+      color: white;
+      padding: 5px;
+      font-size: 18px;
+    }
+
+    div.silverlightDlrErrorSource {
+      margin: 10px;
+    }
+
+    div.silverlightDlrErrorSourceFile,
+    div.silverlightDlrErrorType {
+      font-weight: bold;
+      font-size: 14px;
+      padding-left: 5px;
+    }
+
+    code.silverlightDlrErrorSourceCode {
+      color: #ccc;
+      background-color: #222;
+      display: block;
+      padding: 10px;
+    }
+
+    span.silverlightDlrErrorLine {
+      color: red;
+    }
+
+    div.silverlightDlrErrorType {
+      border-bottom: 1px solid gray;
+    }
+
+    code.silverlightDlrErrorStackTrace {
+      display: block;
+      padding: 5px 10px;
+      max-height: 300px;
+      overflow: auto;
+    }
+    div.silverlightDlrErrorStackTraceLine {
+      border-bottom: 1px solid #bbb;
+    }
+
+    div.silverlightDlrErrorMenu {
+      background-color: #440000;
+      color: white;
+      font-size: 12px;
+      padding: 5px;
+
+      position: absolute;
+      height: 15px;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      margin-top: 15px;
+    }
+    div.silverlightDlrErrorMenu a,
+    div.silverlightDlrErrorMenu a:link,
+    div.silverlightDlrErrorMenu a:visited {
+      padding: 2px;
+      background-color: none;
+      color: white;
+    }
+    div.silverlightDlrErrorMenu a:hover {
+      background-color: white;
+      color: #440000;
+    }
+
+    div.silverlightDlrErrorMenu, 
+    div.silverlightDlrErrorWrapper {
+      position: fixed;
+    }
+    #debugConsole 
+    {
+    	position: absolute;
+    	left: 0;
+    	bottom: 0;
+    	display: none;
+    	background: white;
+    	width: 100%;
+    }
+    #debugTitle
+    {
+    	background: blue;
+    	padding: 5px;
+    }
+    #debugTitle h4
+    {
+    	float: left;
+    	margin: 0;
+    	color: white;
+    	font-size: large;
+    	font-weight: bold;
+    }
+    #debugTitle a
+    {
+    	display: block;
+    	color: white;
+    	text-align: right;
+    }
+    #debugTxt
+    {
+    	width: 99.7%;
+    	white-space: pre;
+    	font-family: Consolas;
+    }
+    #debugConsoleShow
+    {
+    	position: absolute;
+    	right: 0;
+    	bottom: 0;
+    	display: none;
+    	background: blue;
+    	color: white;
+    	padding: 3px;
+	}
+	html, body, #silverlightControlHost, #silverlightControl
+	{
+		width: 100%;
+		height: 100%;
+	}
+  </style>
+
+  <!-- 
+    Error handling for when DLR errors are disabled (with 
+    reportErrors=false, or not defined at all)
+  -->
+</head>
+
+<body>
+  <script type="text/javascript">
+    function onSilverlightError(sender, args) {
+      if (args.errorType == "InitializeError")  {
+        var errorDiv = document.getElementById("errorLocation");
+        if (errorDiv != null)
+          errorDiv.innerHTML = args.errorType + "- " + args.errorMessage;
+      }
+    }
+    document.body.onload = function() {  
+        var silverlightControl = document.getElementById('silverlightControl');  
+        if (silverlightControl)  
+            silverlightControl.focus();  
+    }; 
+    function hideDebugConsole() {
+        var console = document.getElementById('debugConsole');
+        console.style.display = 'none';
+        var show = document.getElementById('debugConsoleShow');
+        show.style.display = 'block';
+    }
+    function showDebugConsole() {
+        var console = document.getElementById('debugConsole');
+        console.style.display = 'block';
+        var show = document.getElementById('debugConsoleShow');
+        show.style.display = 'none';
+    }
+  </script>
+  <!-- 
+    Syntax/Runtime errors from Silverlight will be displayed here.
+    This will contain debugging information and should be removed 
+    or hidden when debugging is completed 
+  -->
+  <div id='errorLocation' style="font-size: small;color: Gray;"></div>
+
+  <div id="silverlightControlHost">
+    
+    <object id="silverlightControl" data="data:application/x-silverlight," type="application/x-silverlight-2">
+      <param name="source" value="client.xap"/>
+      <param name="onerror" value="onSilverlightError" />
+      <param name="background" value="#000000" />
+      <param name="initParams" value="debug=true,reportErrors=errorLocation" />
+      <param name="windowless" value="true" />
+      
+      <!--<a href="http://go.microsoft.com/fwlink/?LinkID=108182" style="text-decoration: none;">
+          <img src="http://go.microsoft.com/fwlink/?LinkId=108181" alt="Get Microsoft Silverlight" style="border-style: none"/>
+	  </a>-->
+    </object>
+    <iframe style='visibility:hidden;height:0;width:0;border:0px'></iframe>
+     
+  </div>
+  
+  <a id="debugConsoleShow" href="javascript:showDebugConsole()">Show Output</a>
+  <div id="debugConsole">
+    <div id="debugTitle"><h4>Debug Output</h4><a href="javascript:hideDebugConsole()">Hide Output</a></div>
+    <div id="debugFrame">
+        <textarea id="debugTxt" readonly="readonly" rows="15" cols="80"></textarea>
+    </div>
+  </div>
+
+</body>
+
+</html>
