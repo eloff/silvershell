@@ -153,7 +153,7 @@ class SilverShell(object):
         
     def redirect_stdstreams(self):        
         self.engine.strm = sys.stdout = TextBoxStream(self.buffer)
-        #sys.stderr = sys.stdout # comment this out to see exceptions at system console
+        sys.stderr = sys.stdout # comment this out to see exceptions at system console
         
     def start(self):
         self.ps.Text = sys.ps1
